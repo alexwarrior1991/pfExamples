@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <title>Gestión de Reservas - Salas de Reunión</title>
+        <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+    </h:head>
+
+    <h:body>
+        <h1>Gestión de Reservas de Salas de Reunión</h1>
+
+        <!-- Formulario para Configuración de Reserva -->
+        <h:form id="reservationForm">
+            <h2>Configurar Reserva</h2>
+            <p:panelGrid columns="2" style="margin-bottom: 20px">
+                <!-- Seleccionar Sala de Reuniones -->
+                <p:outputLabel value="Sala:" for="selectedRoom"/>
+                <p:inputText id="selectedRoom" value="#{roomReservationController.selectedRoom}"/>
+
+                <!-- Fecha de la reserva -->
+                <p:outputLabel value="Fecha (yyyy-MM-dd):" for="reservationDate"/>
+                <p:calendar id="reservationDate" value="#{roomReservationController.reservationDate}"
+                            pattern="yyyy-MM-dd"/>
+
+                <!-- Hora de la reserva -->
+                <p:outputLabel value="Hora de inicio (HH:mm):" for="reservationTime"/>
+                <p:inputMask id="reservationTime" value="#{roomReservationController.reservationTime}" mask="99:99"/>
+
+                <!-- Duración de la reserva -->
+                <p:outputLabel value="Duración (en horas):" for="reservationDuration"/>
+                <p:spinner id="reservationDuration" value="#{roomReservationController.reservationDuration}"
+                           min="1" max="8" stepFactor="1"/>
+            </p:panelGrid>
+
+            <!-- Botones de acción para Configurar y Confirmar Reserva -->
+            <p:commandButton value="Configurar" action="#{roomReservationController.setupReservation}"
+                             update="detailsPanel, messages"
+                             ajax="true"
+                             style="margin-right: 10px;"/>
+
+            <p:commandButton value="Confirmar"
+                             action="#{roomReservationController.confirmReservation}"
+                             update="messages"
+                             ajax="true"/>
+        </h:form>
+
+        <!-- Panel para mostrar detalles de la reserva configurada -->
+        <h:form id="detailsPanel">
+            <h2>Detalles de la Reserva Configurada</h2>
+            <p:panel>
+                <h:outputText value="#{roomReservationController.reservationDetails}" escape="false"/>
+            </p:panel>
+        </h:form>
+
+        <!-- Consultar Disponibilidad de Salas -->
+        <h:form id="availabilityForm">
+            <h2>Consultar Disponibilidad de Salas</h2>
+            <p:commandButton value="Consultar Disponibilidad"
+                             action="#{roomReservationController.checkAvailability}"
+                             update="availabilityResult"
+                             ajax="true" />
+            <h:outputText id="availabilityResult" value="#{roomReservationController.availabilityResult}" escape="false" style="margin-top: 10px; display: block;" />
+        </h:form>
+
+        <!-- Panel de mensajes para mostrar respuestas del sistema -->
+        <p:messages id="messages" autoUpdate="true" showDetail="true" />
+
+    </h:body>
+</f:view>
+</html>

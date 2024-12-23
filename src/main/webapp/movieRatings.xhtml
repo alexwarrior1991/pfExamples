@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="UTF-8"/>
+        <title>Gestión de Calificaciones de Películas</title>
+        <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+    </h:head>
+
+    <h:body>
+        <h1>Gestión de Calificaciones de Películas</h1>
+        <h:form id="movieForm">
+            <!-- Añadir Película -->
+            <p:panel id="addMoviePanel" header="Añadir Película">
+                <p:inputText id="movieName" value="#{movieBean.newMovie}" placeholder="Nombre de la película"/>
+                <p:commandButton id="addMovieButton" value="Añadir Película" action="#{movieBean.addMovie}"
+                                 update="movieList ratingTable averageTable"/>
+            </p:panel>
+
+            <!-- Añadir Calificación -->
+            <p:panel id="addRatingPanel" header="Añadir Calificación">
+                <p:selectOneMenu id="selectMovie" value="#{movieBean.selectedMovie}"
+                                 style="width: 100%">
+                    <f:selectItem itemLabel="Seleccionar una película" itemValue=""/>
+                    <f:selectItems value="#{movieBean.movieList}"/>
+                </p:selectOneMenu>
+                <p:spinner id="ratingSpinner" value="#{movieBean.rating}" min="1" max="5"/>
+                <p:commandButton id="addRatingButton" value="Calificar" action="#{movieBean.addRating}"
+                                 update="movieList ratingTable averageTable"/>
+            </p:panel>
+
+            <!-- Mostrar Puntuaciones Promedio -->
+            <p:panel id="averageRatingPanel" header="Puntuaciones Promedio">
+                <p:dataTable id="averageTable" value="#{movieBean.averageRatings}" var="entry">
+                    <p:column headerText="Película">
+                        #{entry.key}
+                    </p:column>
+                    <p:column headerText="Puntuación Promedio">
+                        #{entry.value}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+            <!-- Mostrar Calificaciones Individuales -->
+            <p:panel id="individualRatingsPanel" header="Calificaciones Individuales">
+                <p:dataTable id="ratingTable" value="#{movieBean.allRatings}" var="rating">
+                    <p:column headerText="Película">
+                        #{rating.movie}
+                    </p:column>
+                    <p:column headerText="Calificación">
+                        #{rating.score}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+    </h:body>
+</f:view>
+</html>
