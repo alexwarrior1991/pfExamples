@@ -33,6 +33,8 @@ public class UserBean implements Serializable {
     public void blockUser(User user) {
         if (user != null && !user.isBlocked()) {
             user.setBlocked(true);
+            System.out.println("Usuario bloqueado: " + user.getName());
+            System.out.println("Estado actualizado: " + user.isBlocked());
             sendAjaxCallback(user.getName(), "ha sido bloqueado exitosamente");
         } else {
             sendAjaxCallback(null, null); // Sin parámetros si ocurre un error

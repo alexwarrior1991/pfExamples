@@ -39,7 +39,7 @@
 
                     <!-- Botón para Desbloquear -->
                     <p:commandButton value="Desbloquear" action="#{userBean.unblockUser(user)}"
-                                     update="userTable" rendered="#{user.blocked}"
+                                     update=":userForm:userTable" rendered="#{user.blocked}"
                                      oncomplete="handleUserAction(xhr, status, args)"
                                      styleClass="ui-button-success" />
                 </p:column>
@@ -49,9 +49,11 @@
         <!-- Javascript para manejar las acciones de los usuarios al recibir datos del backend -->
         <script>
             function handleUserAction(xhr, status, args) {
+                console.log("Datos del callback recibidos desde el backend:", args);
                 // Captura los parámetros enviados desde el backend con addCallbackParam
-                var userName = args.userName;      // Nombre del usuario
+                var userName = args.username;      // Nombre del usuario
                 var actionMessage = args.actionMessage; // Mensaje de acción (bloqueo/desbloqueo)
+
 
                 if (userName &amp;&amp; actionMessage) {
                     // Mostrar un mensaje emergente con la información de la acción

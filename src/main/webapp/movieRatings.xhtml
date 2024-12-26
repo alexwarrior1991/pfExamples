@@ -24,7 +24,7 @@
 
             <!-- Añadir Calificación -->
             <p:panel id="addRatingPanel" header="Añadir Calificación">
-                <p:selectOneMenu id="selectMovie" value="#{movieBean.selectedMovie}"
+                <p:selectOneMenu id="movieList" value="#{movieBean.selectedMovie}"
                                  style="width: 100%">
                     <f:selectItem itemLabel="Seleccionar una película" itemValue=""/>
                     <f:selectItems value="#{movieBean.movieList}"/>
