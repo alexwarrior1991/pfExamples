@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>#{tituloBean.titulo}</title>
+        <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+        <ui:insert name="head"/>
+    </h:head>
+    <h:body>
+        <!-- Contenedor principal con Flexbox -->
+        <div class="flex flex-column min-h-screen">
+            <!-- Cabecera -->
+            <div class="bg-gray-200 text-center p-4 shadow-2">
+                <h1 class="text-2xl font-bold">Gestor de Tareas</h1>
+                <ui:insert name="header"/>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="grow p-4">
+                <ui:insert name="content"/>
+            </div>
+
+            <!-- Pie de página -->
+            <div class="bg-gray-300 text-center p-2">
+                <h:outputText value="© 2023 - Mi Aplicación"/>
+                <ui:insert name="footer"/>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>

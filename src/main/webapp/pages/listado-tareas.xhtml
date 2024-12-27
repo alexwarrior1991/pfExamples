@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
+    <!-- Título de la página -->
+    <ui:define name="head">
+        <h:outputText value="Gestor de Tareas - Página Principal"/>
+    </ui:define>
+
+    <!-- Contenido principal -->
+    <ui:define name="content">
+        <h2 class="text-xl mb-4">Lista de Tareas</h2>
+        <p:dataTable id="tareas" value="#{tareasBean.tareas}"
+                     var="tarea">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{tarea.nombre}"/>
+            </p:column>
+            <p:column headerText="Descripcion">
+                <h:outputText value="#{tarea.descripcion}"/>
+            </p:column>
+        </p:dataTable>
+
+        <!-- Espacio para incluir el formulario -->
+        <div class="mt-4">
+            <h3>Agregar Nueva Tarea</h3>
+            <ui:include src="/fragments/formulario-tarea.xhtml"/>
+        </div>
+    </ui:define>
+
+</ui:composition>
